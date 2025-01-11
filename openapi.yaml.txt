@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: "Prime factorization API"
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /primes:
+    post:
+      requestBody:
+        description: The numbers to be factorized
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InputNumbers"
+      responses:
+        "200":
+          description: The prime factorization of the input numbers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrimeFactorization"
+components:
+  schemas:
+    InputNumbers:
+      type: object
+      required:
+        - input_numbers
+      properties:
+        input_numbers:
+          type: array
+          items:
+            type: integer
+            minimum: 1
+            maximum: 1000
+    PrimeFactorization:
+        type: object
+        required:
+         - result
+        properties:
+         result:
+           type: array
+           items:
+             type: object
+             required:
+               - input_number
+               - prime_factors
+             properties:
+                input_number:
+                  type: integer
+                prime_factors:
+                  type: array
+                  items:
+                    type: integer
